@@ -4,7 +4,7 @@ RSpec.describe LikesController, type: :controller do
   render_views
 
   describe "create" do
-    it "responds to js requests with js" do
+    it "responds to js requests with js", points: 1 do
       owner = User.create(
         username: "test",
         email: "test@example.com",
@@ -37,7 +37,7 @@ RSpec.describe LikesController, type: :controller do
   end
 
   describe "destroy" do
-    it "responds to js requests with js" do
+    it "responds to js requests with js", points: 1 do
       owner = User.create(
         username: "test",
         email: "test@example.com",

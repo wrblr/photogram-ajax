@@ -4,7 +4,7 @@ RSpec.describe FollowRequestsController, type: :controller do
   render_views
 
   describe "create" do
-    it "responds to js requests with js" do
+    it "responds to js requests with js", points: 1 do
       sender = User.create(
         username: "sender",
         email: "sender@example.com",
@@ -31,7 +31,7 @@ RSpec.describe FollowRequestsController, type: :controller do
   end
 
   describe "destroy" do
-    it "responds to js requests with js" do
+    it "responds to js requests with js", points: 1 do
       sender = User.create(
         username: "sender",
         email: "sender@example.com",

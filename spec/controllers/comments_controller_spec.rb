@@ -4,7 +4,7 @@ RSpec.describe CommentsController, type: :controller do
   render_views
 
   describe "create" do
-    it "responds to js requests with js" do
+    it "responds to js requests with js", points: 1 do
       owner = User.create(
         username: "test",
         email: "test@example.com",
@@ -43,7 +43,7 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe "edit" do
-    it "responds to js requests with js" do
+    it "responds to js requests with js", points: 1 do
       owner = User.create(
         username: "test",
         email: "test@example.com",
@@ -82,7 +82,7 @@ RSpec.describe CommentsController, type: :controller do
   describe "update" do
     routes { Rails.application.routes }
 
-    it "responds to js requests with js" do
+    it "responds to js requests with js", points: 1 do
       owner = User.create(
         username: "test",
         email: "test@example.com",
@@ -126,7 +126,7 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe "destroy" do
-    it "responds to js requests with js" do
+    it "responds to js requests with js", points: 1 do
       owner = User.create(
         username: "test",
         email: "test@example.com",
