@@ -2,6 +2,9 @@ desc "Fill the database tables with some sample data"
 task sample_data: :environment do
   starting = Time.now
 
+  # Clean up existing uploaded files
+  FileUtils.rm_rf(Rails.root.join("public", "uploads"))
+
   FollowRequest.destroy_all
   Comment.destroy_all
   Like.destroy_all
@@ -11,7 +14,7 @@ task sample_data: :environment do
   people = Array.new(10) do
     {
       first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name
+      last_name: Faker::Name.last_name,
     }
   end
 
@@ -25,7 +28,7 @@ task sample_data: :environment do
     username = person.fetch(:first_name).downcase
     secret = false
 
-    if [ "alice", "carol" ].include?(username) || User.where(private: true).count <= 6
+    if ["alice", "carol"].include?(username) || User.where(private: true).count <= 6
       secret = true
     end
 
@@ -41,7 +44,7 @@ task sample_data: :environment do
       ),
       website: Faker::Internet.url,
       private: secret,
-      avatar_image: "https://robohash.org/#{username}"
+      avatar_image: File.open("#{Rails.root}/public/avatars/#{rand(1..10)}.jpeg")
     )
   end
 
@@ -75,18 +78,9 @@ task sample_data: :environment do
 
   users.each do |user|
     rand(15).times do
-      # This allows the image to display whether in a codespace, deployed, or local environment
-      image_url = if ENV.fetch("CODESPACE_NAME", nil).present?
-        "https://#{ENV.fetch("CODESPACE_NAME")}-3000.app.github.dev/#{rand(1..10)}.jpeg"
-      elsif ENV.fetch("APPLICATION_HOST", nil).present?
-        "https://#{ENV.fetch("APPLICATION_HOST")}/#{rand(1..10)}.jpeg"
-      else
-        "http://localhost:3000/#{rand(1..10)}.jpeg"
-      end
-
       photo = user.own_photos.create(
         caption: Faker::Quote.jack_handey,
-        image: image_url
+        image: File.open("#{Rails.root}/public/photos/#{rand(1..10)}.jpeg")
       )
 
       user.followers.each do |follower|

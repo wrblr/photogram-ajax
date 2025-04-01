@@ -32,6 +32,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  mount_uploader :avatar_image, ImageUploader
 
   has_many :comments, foreign_key: :author_id, dependent: :destroy
 
@@ -71,7 +73,7 @@ class User < ApplicationRecord
 
   validates :website, url: { allow_blank: true }
 
-  validates :avatar_image, presence: true, url: true
+  validates :avatar_image, presence: true
 
   scope :past_week, -> { where(created_at: 1.week.ago...) }
 
