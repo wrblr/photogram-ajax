@@ -11,7 +11,7 @@
 
         <div>
           <% if comment.author == current_user %>
-            <%= link_to edit_comment_path(comment), class: "btn btn-link btn-sm text-muted" do %>
+            <%= link_to edit_comment_path(comment), class: "btn btn-link btn-sm text-muted", remote: true do %>
               <i class="fas fa-edit fa-fw"></i>
             <% end %>
 
@@ -23,5 +23,5 @@
       </div>
       <p><%= comment.body %></p>
     </div>
-  </div> 
+  </div>
 </li>
