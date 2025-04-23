@@ -1,0 +1,5 @@
+var existingFollowRequest = $(".<%= dom_id(@follow_request.recipient)%>");
+
+var unRequestLink = $("<%= j(render "follow_requests/follow_unfollow", sender: @follow_request.sender, recipient: @follow_request.recipient) %>" );
+
+existingFollowRequest.replaceWith(unRequestLink);

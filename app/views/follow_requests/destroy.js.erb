@@ -1,0 +1,5 @@
+var existingFollowRequest = $(".<%= dom_id(@follow_request) %>");
+
+var followForm = $("<%= j(render "follow_requests/form", follow_request: @follow_request.recipient.received_follow_requests.build) %>");
+
+existingFollowRequest.replaceWith(followForm);
